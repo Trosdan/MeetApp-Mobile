@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { Image } from 'react-native';
 
 import {
   Container,
@@ -8,6 +9,8 @@ import {
   SignLink,
   SignLinkText,
 } from './styles';
+
+import logo from '~/assets/img/logo.png';
 
 export default function SignIn({ navigation }) {
   const passwordRef = useRef();
@@ -19,6 +22,7 @@ export default function SignIn({ navigation }) {
 
   return (
     <Container>
+      <Image source={logo} />
       <Form>
         <FormInput
           keyboardType="email-address"

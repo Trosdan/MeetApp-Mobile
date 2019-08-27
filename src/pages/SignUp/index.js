@@ -1,4 +1,6 @@
 import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Image } from 'react-native';
 
 import {
   Container,
@@ -9,7 +11,12 @@ import {
   SignLinkText,
 } from './styles';
 
+import { signUpRequest } from '~/store/modules/auth/actions';
+import logo from '~/assets/img/logo.png';
+
 export default function SignUp({ navigation }) {
+  const dispatch = useDispatch();
+
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -17,10 +24,13 @@ export default function SignUp({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handlerSubmit() {}
+  function handlerSubmit() {
+    dispatch(signUpRequest(name, email, password));
+  }
 
   return (
     <Container>
+      <Image source={logo} />
       <Form>
         <FormInput
           autoCorrect={false}
@@ -38,7 +48,7 @@ export default function SignUp({ navigation }) {
           placeholder="Digite seu e-mail"
           ref={emailRef}
           returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current.Focus()}
+          onSubmitEditing={() => passwordRef.current.focus()}
           value={email}
           onChangeText={setEmail}
         />
