@@ -23,7 +23,7 @@ export default function MeetupCard() {
         }}
       />
       <ContentCard>
-        <Title>Encontro dos Otarios</Title>
+        <Title>Encontro Beneficente</Title>
         <HorizontalOrientation>
           <Icon name="event" size={20} color="#999999" />
           <Date>25 de Agosto, Às 20h</Date>
