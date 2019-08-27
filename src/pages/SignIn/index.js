@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Image } from 'react-native';
 
 import {
@@ -10,15 +11,19 @@ import {
   SignLinkText,
 } from './styles';
 
+import { signInRequest } from '~/store/modules/auth/actions';
 import logo from '~/assets/img/logo.png';
 
 export default function SignIn({ navigation }) {
+  const dispatch = useDispatch();
   const passwordRef = useRef();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handlerSubmit() {}
+  function handlerSubmit() {
+    dispatch(signInRequest(email, password));
+  }
 
   return (
     <Container>

@@ -6,18 +6,15 @@ import './config/ReactotronConfig';
 
 import { store, persistor } from './store';
 
-import { setNavigator } from './services/NavigationService';
-import createRoutes from './routes';
+import App from './App';
 import Background from './components/Background';
 
-export default function App() {
-  const Routes = createRoutes();
-
+export default function Index() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <Background>
-          <Routes ref={setNavigator} />
+          <App />
         </Background>
       </PersistGate>
     </Provider>
