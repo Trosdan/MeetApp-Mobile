@@ -1,16 +1,18 @@
 import React from 'react';
-import { Text } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import MeetupCard from '~/components/MeetupCard';
 import Header from '~/components/Header';
-// import { Container } from './styles';
+import { Container } from './styles';
 
 export default function Subscription() {
   return (
     <>
       <Header />
-      <Text>Subscriotion</Text>
+      <Container>
+        <MeetupCard />
+      </Container>
     </>
   );
 }

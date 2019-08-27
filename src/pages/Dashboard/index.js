@@ -4,13 +4,16 @@ import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Header from '~/components/Header';
-// import { Container } from './styles';
+import MeetupCard from '~/components/MeetupCard';
+import { Container } from './styles';
 
 export default function Dashboard() {
   return (
     <>
       <Header />
-      <Text>Dashboard</Text>
+      <Container>
+        <MeetupCard />
+      </Container>
     </>
   );
 }

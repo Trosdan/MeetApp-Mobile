@@ -1,5 +1,4 @@
 import React from 'react';
-import { Text } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -10,7 +9,6 @@ export default function Profile() {
   return (
     <>
       <Header />
-      <Text>Profile</Text>
     </>
   );
 }
