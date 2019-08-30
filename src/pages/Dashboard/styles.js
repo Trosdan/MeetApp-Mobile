@@ -5,6 +5,12 @@ export const Container = styled.View`
   align-items: center;
 `;
 
+export const TextEmpty = styled.Text`
+  font-size: 25px;
+  color: #9999;
+  font-weight: bold;
+`;
+
 export const DateSelector = styled.View`
   flex-direction: row;
   justify-content: space-around;

@@ -3,11 +3,22 @@ import { Alert } from 'react-native';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
-import { meetupsLoadSuccess, meetupsLoadFailure } from './actions';
+import {
+  meetupsLoadSuccess,
+  meetupsLoadFailure,
+  meetupsLoadInfinitySuccess,
+  meetupsLoadInfinityStop,
+} from './actions';
 
-export function* meetupsloadRequest() {
+export function* meetupsloadRequest({ payload }) {
   try {
-    const response = yield call(api.get, 'meetup');
+    const { date, page } = payload;
+    const response = yield call(api.get, 'meetup', {
+      params: {
+        date: format(date, 'yyyy-MM-dd'),
+        page,
+      },
+    });
     const data = response.data.map(meetup => {
       const dateFormat = format(
         parseISO(meetup.date),
@@ -17,9 +28,20 @@ export function* meetupsloadRequest() {
         }
       );
 
-      return { ...meetup, dateFormat };
+      const url = String(meetup.file.url).replace(
+        'http://localhost:3333',
+        api.defaults.baseURL
+      );
+
+      return { ...meetup, dateFormat, file: { url } };
     });
-    yield put(meetupsLoadSuccess(data));
+    if (page === 1) {
+      yield put(meetupsLoadSuccess(data));
+    } else if (data.length) {
+      yield put(meetupsLoadInfinitySuccess(data));
+    } else {
+      yield put(meetupsLoadInfinityStop());
+    }
   } catch (err) {
     Alert.alert('Não foi possivel carregar os Meetups');
     yield put(meetupsLoadFailure());

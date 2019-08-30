@@ -1,4 +1,7 @@
 import React from 'react';
+
+import PropTypes from 'prop-types';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -13,33 +16,58 @@ import {
   ButtunSubcription,
 } from './styles';
 
-export default function MeetupCard() {
+export default function MeetupCard({
+  data: {
+    title,
+    location,
+    dateFormat,
+    User: { name },
+    file: { url },
+  },
+  actionButtonFunc,
+  actionButtonText,
+}) {
   return (
     <Container>
       <Image
         source={{
-          uri:
-            'http://10.0.2.2:3333/files/7b7fb22d2cfae6d403563aa05a7c4a7e.jpg',
+          uri: url,
         }}
       />
       <ContentCard>
-        <Title>Encontro Beneficente</Title>
+        <Title>{title}</Title>
         <HorizontalOrientation>
           <Icon name="event" size={20} color="#999999" />
-          <Date>25 de Agosto, Às 20h</Date>
+          <Date>{dateFormat}</Date>
         </HorizontalOrientation>
         <HorizontalOrientation>
           <Icon name="location-on" size={20} color="#999999" />
-          <Location>Rua Fernando Augustinho</Location>
+          <Location>{location}</Location>
         </HorizontalOrientation>
         <HorizontalOrientation>
           <Icon name="person" size={20} color="#999999" />
-          <Organizer>Organizador: Jordan Oliveira</Organizer>
+          <Organizer>{name}</Organizer>
         </HorizontalOrientation>
-        <ButtunSubcription onPress={() => {}}>
-          Realizar inscrição
+        <ButtunSubcription onPress={actionButtonFunc}>
+          {actionButtonText}
         </ButtunSubcription>
       </ContentCard>
     </Container>
   );
 }
+
+MeetupCard.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    dateFormat: PropTypes.string,
+    location: PropTypes.string,
+    User: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    file: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+  }).isRequired,
+  actionButtonFunc: PropTypes.func.isRequired,
+  actionButtonText: PropTypes.string.isRequired,
+};
