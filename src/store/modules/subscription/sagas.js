@@ -4,6 +4,7 @@ import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import api from '~/services/api';
 import {
+  subscriptionLoadRequest as actionSubscriptionLoadRequest,
   subscriptionLoadSuccess,
   subscriptionLoadFailure,
   subscriptionDeleteSuccess,
@@ -42,7 +43,7 @@ export function* subscriptionLoadRequest() {
 export function* subscriptionNewRequest({ payload: { id } }) {
   try {
     yield call(api.post, `subscription/${id}`);
-    yield put(subscriptionLoadRequest());
+    yield put(actionSubscriptionLoadRequest());
     Alert.alert('Cadastro Realizado');
   } catch (err) {
     Alert.alert('Erro ao Realizar cadastro', `${err.response.data.error}`);
@@ -53,9 +54,8 @@ export function* subscriptionDeleteRequest({ payload: { id } }) {
   try {
     yield call(api.delete, `subscription/${id}`);
     yield put(subscriptionDeleteSuccess(id));
-    Alert.alert('Cadastro Deletado');
   } catch (err) {
-    Alert.alert('Erro ao Deletar cadastro', `${err.response.data.error}`);
+    Alert.alert('Erro ao Deletar cadastro');
   }
 }
 

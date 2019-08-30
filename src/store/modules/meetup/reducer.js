@@ -3,7 +3,7 @@ import produce from 'immer';
 const INITIAL_STATE = {
   meetups: [],
   loading: false,
-  loadInfinity: false,
+  loadInfinity: true,
 };
 
 export default function Meetup(state = INITIAL_STATE, action) {
@@ -23,11 +23,12 @@ export default function Meetup(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       case '@meetup/MEETUPS_LOAD_INFINITY_STOP':
-        draft.loadInfinity = false;
         draft.loading = false;
+        draft.loadInfinity = false;
         break;
       case '@meetup/MEETUPS_LOAD_FAILURE':
         draft.loading = false;
+        draft.loadInfinity = false;
         break;
       default:
     }

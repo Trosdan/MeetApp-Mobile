@@ -86,7 +86,7 @@ export default function Dashboard() {
             onEndReached={loadMoreMeetups}
             onEndReachedThreshold={0.1}
             ListFooterComponent={() =>
-              loading || <ActivityIndicator size="small" />
+              !loading || <ActivityIndicator size="large" />
             }
           />
         ) : (
