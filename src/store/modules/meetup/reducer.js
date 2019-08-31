@@ -11,6 +11,9 @@ export default function Meetup(state = INITIAL_STATE, action) {
     switch (action.type) {
       case '@meetup/MEETUPS_LOAD_REQUEST':
         draft.loading = true;
+        if (action.payload.page === 1) {
+          draft.meetups = [];
+        }
         break;
       case '@meetup/MEETUPS_LOAD_SUCCESS':
         draft.meetups = action.payload.meetups;

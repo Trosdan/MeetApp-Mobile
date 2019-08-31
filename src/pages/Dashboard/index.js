@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -31,7 +31,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch(meetupsLoadRequest(date, page));
-  }, [date, dispatch, page]);
+    setPage(page + 1);
+  }, [date, dispatch]);//eslint-disable-line
 
   const dateFormat = useMemo(() => {
     return format(date, "dd 'de' MMMM", {
@@ -39,24 +40,52 @@ export default function Dashboard() {
     });
   }, [date]);
 
-  function handlerNextDay() {
+  const handlerNextDay = useCallback(() => {
     setDate(addDays(date, -1));
     setPage(1);
-  }
+  }, [date]);
 
-  function handlerPreviousDay() {
+  const handlerPreviousDay = useCallback(() => {
     setDate(addDays(date, +1));
     setPage(1);
-  }
+  }, [date]);
 
   function loadMoreMeetups() {
     if (loadInfinity) {
+      dispatch(meetupsLoadRequest(date, page));
       setPage(page + 1);
     }
   }
 
   function subscriptionNewMeetup(id) {
     dispatch(subscriptionNewRequest(id));
+  }
+
+  function renderMeetup() {
+    if (loading && !meetups.length) {
+      return <ActivityIndicator size="large" />;
+    }
+    if (!meetups.length) {
+      return <TextEmpty>Não existe Meetups :(</TextEmpty>;
+    }
+    return (
+      <MeetupList
+        data={meetups}
+        keyExtractor={item => String(item.id)}
+        renderItem={({ item }) => (
+          <MeetupCard
+            data={item}
+            actionButtonFunc={() => subscriptionNewMeetup(item.id)}
+            actionButtonText="Realizar inscrição"
+          />
+        )}
+        onEndReached={loadMoreMeetups}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={() =>
+          !loading || <ActivityIndicator size="large" />
+        }
+      />
+    );
   }
 
   return (
@@ -72,26 +101,7 @@ export default function Dashboard() {
             <Icon name="chevron-right" size={50} color="#fff" />
           </TouchableOpacity>
         </DateSelector>
-        {meetups.length ? (
-          <MeetupList
-            data={meetups}
-            keyExtractor={item => String(item.id)}
-            renderItem={({ item }) => (
-              <MeetupCard
-                data={item}
-                actionButtonFunc={() => subscriptionNewMeetup(item.id)}
-                actionButtonText="Realizar inscrição"
-              />
-            )}
-            onEndReached={loadMoreMeetups}
-            onEndReachedThreshold={0.1}
-            ListFooterComponent={() =>
-              !loading || <ActivityIndicator size="large" />
-            }
-          />
-        ) : (
-          <TextEmpty>Não existe Meetups :(</TextEmpty>
-        )}
+        {renderMeetup()}
       </Container>
     </>
   );
