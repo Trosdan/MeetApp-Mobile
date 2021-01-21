@@ -2107,11 +2107,6 @@ data-urls@^1.0.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-date-fns-tz@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-1.0.7.tgz#1c80f7592cca5da4fd2085132936dcc7fa9afecd"
-  integrity sha512-oNfi/3IxRfmysRIT+QJMbO/44Uj10nApAYJvlayTmNRFZG+JqdOJYXm1DWU65DNlG/ySbuQwpFkGIa3b2XFUVw==
-
 date-fns@^2.0.0-beta.5:
   version "2.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-beta.5.tgz#90885db3772802d55519cd12acd49de56aca1059"
@@ -3339,10 +3334,10 @@ image-size@^0.6.0:
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.6.3.tgz#e7e5c65bb534bd7cdcedd6cb5166272a85f75fb2"
   integrity sha512-47xSUiQioGaB96nqtp5/q55m0aBQSQdyIloMOc/x+QVTDZLNmXE892IIDrJ0hM1A5vcNUDD5tDffkSP5lCaIIA==
 
-immer@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/immer/-/immer-3.2.0.tgz#53686471e9dd2b070e0fb5500c6fdecd3a99375f"
-  integrity sha512-+a2R8z9eELHst6aht++nzVzJ8LJ+Hsg49qttfg9Kc/vmoxEdPXw5/rV6+4DYWGgnq+B36KbLr4OTaGtS9mDjtg==
+immer@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.1.tgz#9c73db683e2b3975c424fb0572af5889877ae656"
+  integrity sha512-aqXhGP7//Gui2+UrEtvxZxSquQVXTpZ7KDxfCcKAF3Vysvw0CViVaW9RZ1j1xlIYqaaaipBoqdqeibkc18PNvA==
 
 import-fresh@^2.0.0:
   version "2.0.0"
